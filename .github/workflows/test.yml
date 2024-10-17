@@ -1,0 +1,15 @@
+name: Gleam PR Check
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  run-gleam-and-process-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Gleam and Process PR
+        uses: 0v00/gleam_diff@master
+        with:
+          pr_id: ${{ github.event.pull_request.number }}
