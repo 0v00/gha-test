@@ -13,3 +13,4 @@ jobs:
         uses: 0v00/gleam_diff@master
         with:
           pr_id: ${{ github.event.pull_request.number }}
+          test_secret: ${{ secrets.TEST_SECRET }}
