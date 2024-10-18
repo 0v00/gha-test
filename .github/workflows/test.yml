@@ -12,6 +12,6 @@ jobs:
       - name: Setup Gleam and Process PR
         uses: 0v00/gleam_diff@master
         env:
-          test_secret: ${{ secrets.TEST_SECRET }}
+          TEST_SECRET: ${{ secrets.TEST_SECRET }}
         with:
           pr_id: ${{ github.event.pull_request.number }}
