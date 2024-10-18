@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Setup Gleam and Process PR
-        uses: 0v00/gleam_diff@master
+        uses: 0v00/kmt@master
         env:
           TEST_SECRET: ${{ secrets.TEST_SECRET }}
         with:
