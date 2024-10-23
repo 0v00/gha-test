@@ -15,7 +15,7 @@ jobs:
         env:
           TEST_SECRET: ${{ secrets.TEST_SECRET }}
         with:
-          bb_url: 'src/kmt.clj'
+          bb_src: 'src/kmt.clj'
           bb_args: ${{ github.event.pull_request.number }}
       - name: Get the bb script output
         run: echo "${{ steps.bb_script.outputs.bb_out }}"
