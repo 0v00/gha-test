@@ -36,7 +36,7 @@ jobs:
         env:
           SCRIPT_OUTPUT: ${{ steps.bb_script.outputs.bb_out }}
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.TEST_SECRET }}
           bb_output: ${{ steps.bb_script.outputs.bb_out }}
           script: |
             const output = `${{ steps.bb_script.outputs.bb_out }}`;
