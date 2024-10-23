@@ -37,8 +37,7 @@ jobs:
           SCRIPT_OUTPUT: ${{ steps.bb_script.outputs.bb_out }}
         with:
           github-token: ${{ secrets.TEST_SECRET }}
-          bb_output: ${{ steps.bb_script.outputs.bb_out }}
-        script: |
+          script: |
             const output = `${{ steps.bb_script.outputs.bb_out }}`;
             const commentIdentifier = 'bb-script-output';
 
