@@ -31,7 +31,7 @@
   (mapv #(get % "filename")
         changed-pr-files))
 
-(println filenames)
+(println (apply str filenames))
 
 ;; check if empty just in case
 
