@@ -31,3 +31,14 @@ jobs:
           bb_args: ${{ github.event.pull_request.number }}
       - name: Get the bb script output
         run: echo "${{ steps.bb_script.outputs.bb_out }}"
+      - name: Create PR Comment
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `Babashka script output:\n\n${steps.bb_script.outputs.bb_out}`
+            })
