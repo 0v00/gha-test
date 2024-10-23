@@ -22,9 +22,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Setup BB and Process PR
+        id: bb_script
         uses: tzafrirben/babashka-docker-action@v1.1
         env:
           TEST_SECRET: ${{ secrets.TEST_SECRET }}
         with:
           bb_src: 'src/kmt.clj'
           bb_args: ${{ github.event.pull_request.number }}
+      - name: Get the bb script output
+        run: echo "${{ steps.bb_script.outputs.bb_out }}"
