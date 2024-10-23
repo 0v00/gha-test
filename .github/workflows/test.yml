@@ -4,18 +4,6 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
 
-# jobs:
-#   run-gleam-and-process-pr:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v4
-#       - name: Setup Gleam and Process PR
-#         uses: 0v00/kmt@master
-#         env:
-#           TEST_SECRET: ${{ secrets.TEST_SECRET }}
-#         with:
-#           pr_id: ${{ github.event.pull_request.number }}
-
 jobs:
   run-bb-and-process-pr:
     runs-on: ubuntu-latest
@@ -27,7 +15,7 @@ jobs:
         env:
           TEST_SECRET: ${{ secrets.TEST_SECRET }}
         with:
-          bb_url: 'https://raw.githubusercontent.com/0v00/kmt-clj/refs/heads/master/kmt.clj'
+          bb_url: 'src/kmt.clj'
           bb_args: ${{ github.event.pull_request.number }}
       - name: Get the bb script output
         run: echo "${{ steps.bb_script.outputs.bb_out }}"
