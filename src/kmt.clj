@@ -8,7 +8,7 @@
     (throw (RuntimeException. "You must provide a PR ID."))
     (first args)))
 
-(def gh-token (str "Bearer " (System/getenv "TEST_TOKEN")))
+(def gh-token (str "Bearer " (System/getenv "TEST_SECRET")))
 (def REPO "gha-test")
 (def OWNER "0v00")
 (def BASE-URL "https://api.github.com")
