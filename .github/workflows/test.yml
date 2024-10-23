@@ -11,14 +11,16 @@ jobs:
       - uses: actions/checkout@v4
       - name: Setup BB and Process PR
         id: bb_script
-        uses: 0v00/babashka-action@master
+        uses: 0v00/babashk-action@master
         env:
           TEST_SECRET: ${{ secrets.TEST_SECRET }}
         with:
-          bb_url: 'https://raw.githubusercontent.com/0v00/kmt-clj/master/kmt.clj'
-          bb_args: ${{ github.event.pull_request.number }}
-      - name: Get the bb script output
-        run: echo "${{ steps.bb_script.outputs.bb_out }}"
+          pr_id: ${{ github.event.pull_request.number }}
+        # with:
+        #   bb_url: 'https://raw.githubusercontent.com/0v00/kmt-clj/master/kmt.clj'
+        #   bb_args: ${{ github.event.pull_request.number }}
+      # - name: Get the bb script output
+      #   run: echo "${{ steps.bb_script.outputs.bb_out }}"
       - name: Create PR Comment
         uses: actions/github-script@v7
         env:
