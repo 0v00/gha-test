@@ -22,7 +22,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Setup BB and Process PR
-        uses: tzafrirben/babashka-docker-action@v1
+        uses: tzafrirben/babashka-docker-action@v1.1
         env:
           TEST_SECRET: ${{ secrets.TEST_SECRET }}
         with:
