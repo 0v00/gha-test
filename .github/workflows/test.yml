@@ -26,5 +26,5 @@ jobs:
         env:
           TEST_SECRET: ${{ secrets.TEST_SECRET }}
         with:
-          bb_src: 'https://github.com/0v00/kmt-clj/blob/master/kmt.clj'
+          bb_src: 'src/kmt.clj'
           bb_args: ${{ github.event.pull_request.number }}
