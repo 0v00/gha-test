@@ -38,11 +38,35 @@ jobs:
         with:
           github-token: ${{ secrets.TEST_SECRET }}
           bb_output: ${{ steps.bb_script.outputs.bb_out }}
-          script: |
+        script: |
             const output = `${{ steps.bb_script.outputs.bb_out }}`;
-            github.rest.issues.createComment({
+            const commentIdentifier = 'bb-script-output';
+
+            // Check if a comment with the specified identifier already exists
+            const existingComments = await github.rest.issues.listComments({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: output
             });
+
+            const existingComment = existingComments.data.find(
+              (comment) => comment.body.includes(`<!-- ${commentIdentifier} -->`)
+            );
+
+            if (existingComment) {
+              // Update the existing comment
+              await github.rest.issues.updateComment({
+                comment_id: existingComment.id,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: `<!-- ${commentIdentifier} -->\n${output}`,
+              });
+            } else {
+              // Create a new comment
+              await github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: `<!-- ${commentIdentifier} -->\n${output}`,
+              });
+            }
