@@ -39,9 +39,10 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           bb_output: ${{ steps.bb_script.outputs.bb_out }}
           script: |
+            const output = `${{ steps.bb_script.outputs.bb_out }}`;
             github.rest.issues.createComment({
+              issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              issue_number: context.issue.number,
-              body: `Babashka script output:\n\n${process.env.SCRIPT_OUTPUT}`
-            })
+              body: output
+            });
