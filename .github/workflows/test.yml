@@ -1,15 +1,18 @@
-name: Gleam PR Check
+name: BB PR Check
 
 on:
   pull_request:
     types: [opened, synchronize, reopened]
 
 jobs:
-  run-gleam-and-process-pr:
+  run-bb-and-process-pr:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Setup Gleam and Process PR
-        uses: 0v00/gleam_diff@master
+      - name: Setup BB and Process PR
+        id: bb_script
+        uses: 0v00/kestrel@master
+        env:
+          TEST_SECRET: ${{ secrets.TEST_SECRET }}
         with:
           pr_id: ${{ github.event.pull_request.number }}
