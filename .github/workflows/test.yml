@@ -11,7 +11,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Setup BB and Process PR
         id: bb_script
-        uses: 0v00/babashk-action@master
+        uses: 0v00/kestrel@master
         env:
           TEST_SECRET: ${{ secrets.TEST_SECRET }}
         with:
