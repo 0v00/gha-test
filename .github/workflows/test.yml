@@ -21,41 +21,41 @@ jobs:
         #   bb_args: ${{ github.event.pull_request.number }}
       # - name: Get the bb script output
       #   run: echo "${{ steps.bb_script.outputs.bb_out }}"
-      - name: Create PR Comment
-        uses: actions/github-script@v7
-        env:
-          SCRIPT_OUTPUT: ${{ steps.bb_script.outputs.bb_out }}
-        with:
-          github-token: ${{ secrets.TEST_SECRET }}
-          script: |
-            const output = `${{ steps.bb_script.outputs.bb_out }}`;
-            const commentIdentifier = 'bb-script-output';
+      # - name: Create PR Comment
+      #   uses: actions/github-script@v7
+      #   env:
+      #     SCRIPT_OUTPUT: ${{ steps.bb_script.outputs.bb_out }}
+      #   with:
+      #     github-token: ${{ secrets.TEST_SECRET }}
+      #     script: |
+      #       const output = `${{ steps.bb_script.outputs.bb_out }}`;
+      #       const commentIdentifier = 'bb-script-output';
 
-            // Check if a comment with the specified identifier already exists
-            const existingComments = await github.rest.issues.listComments({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-            });
+      #       // Check if a comment with the specified identifier already exists
+      #       const existingComments = await github.rest.issues.listComments({
+      #         issue_number: context.issue.number,
+      #         owner: context.repo.owner,
+      #         repo: context.repo.repo,
+      #       });
 
-            const existingComment = existingComments.data.find(
-              (comment) => comment.body.includes(`<!-- ${commentIdentifier} -->`)
-            );
+      #       const existingComment = existingComments.data.find(
+      #         (comment) => comment.body.includes(`<!-- ${commentIdentifier} -->`)
+      #       );
 
-            if (existingComment) {
-              // Update the existing comment
-              await github.rest.issues.updateComment({
-                comment_id: existingComment.id,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                body: `<!-- ${commentIdentifier} -->\n${output}`,
-              });
-            } else {
-              // Create a new comment
-              await github.rest.issues.createComment({
-                issue_number: context.issue.number,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                body: `<!-- ${commentIdentifier} -->\n${output}`,
-              });
-            }
+      #       if (existingComment) {
+      #         // Update the existing comment
+      #         await github.rest.issues.updateComment({
+      #           comment_id: existingComment.id,
+      #           owner: context.repo.owner,
+      #           repo: context.repo.repo,
+      #           body: `<!-- ${commentIdentifier} -->\n${output}`,
+      #         });
+      #       } else {
+      #         // Create a new comment
+      #         await github.rest.issues.createComment({
+      #           issue_number: context.issue.number,
+      #           owner: context.repo.owner,
+      #           repo: context.repo.repo,
+      #           body: `<!-- ${commentIdentifier} -->\n${output}`,
+      #         });
+      #       }
